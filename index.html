@@ -42,11 +42,12 @@
                 </ul>
             </div>
             <div class="nav-button">
-                <a href="https://drive.google.com/file/d/1ogoVSyDwKLLQDzO_sBSd-U-fJHj5ESPw/view?usp=sharing" download="Your_Resume.pdf" class="btn">
+                <a href="https://drive.google.com/file/d/1ogoVSyDwKLLQDzO_sBSd-U-fJHj5ESPw/view?usp=sharing"
+                    download="Your_Resume.pdf" class="btn">
                     Download CV <i class="uil uil-file-alt"></i>
                 </a>
             </div>
-            
+
             <div class="nav-menu-btn">
                 <i class="uil uil-bars" onclick="myMenuFunction()"></i>
             </div>
@@ -71,20 +72,21 @@
                     </div>
                     <div class="featured-text-btn">
                         <button class="btn blue-btn">Hire Me</button>
-                        <a href="https://drive.google.com/file/d/1ogoVSyDwKLLQDzO_sBSd-U-fJHj5ESPw/view?usp=sharing" download="Your_Resume.pdf" class="btn">
+                        <a href="https://drive.google.com/file/d/1ogoVSyDwKLLQDzO_sBSd-U-fJHj5ESPw/view?usp=sharing"
+                            download="Your_Resume.pdf" class="btn">
                             Download CV <i class="uil uil-file-alt"></i>
                         </a>
                     </div>
                     <div class="social_icons">
                         <a href="https://leetcode.com/u/nsikarwar496/" target="_blank" class="icon">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" 
-                                 alt="LeetCode" width="30" height="30">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
+                                alt="LeetCode" width="30" height="30">
                         </a>
                         <div class="icon"><i class="uil uil-linkedin-alt"></i></div>
                         <div class="icon"><i class="uil uil-twitter"></i></div>
                         <div class="icon"><i class="uil uil-github-alt"></i></div>
                     </div>
-                    
+
                 </div>
                 <div class="featured-image">
                     <div class="image">
@@ -201,14 +203,14 @@
                     <div class="col">
                         <div class="form-control">
                             <div class="form-inputs">
-                                <input type="text" class="input-field" placeholder="Name">
-                                <input type="text" class="input-field" placeholder="Email">
+                                <input type="text" id="name" class="input-field" placeholder="Name" required>
+                                <input type="email" id="email" class="input-field" placeholder="Email" required>
                             </div>
                             <div class="text-area">
-                                <textarea placeholder="Message"></textarea>
+                                <textarea id="message" placeholder="Message" required></textarea>
                             </div>
                             <div class="form-button">
-                                <button class="btn">Send <i class="uil uil-message"></i></button>
+                                <button class="btn" onclick="sendEmail()">Send <i class="uil uil-message"></i></button>
                             </div>
                         </div>
                     </div>
@@ -221,7 +223,7 @@
         <!-- --------------- FOOTER --------------- -->
         <footer>
             <div class="top-footer">
-                <p>John Doe .</p>
+                <p>Nikhil .</p>
             </div>
             <div class="middle-footer">
                 <ul class="footer-menu">
@@ -241,8 +243,8 @@
             </div>
             <div class="footer-social-icons">
                 <a href="https://leetcode.com/u/nsikarwar496/" target="_blank" class="icon">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" 
-                         alt="LeetCode" width="24" height="24">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png"
+                        alt="LeetCode" width="24" height="24">
                 </a>
                 <a href="https://www.linkedin.com/in/nikhil3108/" target="_blank" class="icon">
                     <i class="uil uil-linkedin-alt"></i>
@@ -254,7 +256,7 @@
                     <i class="uil uil-github-alt"></i>
                 </a>
             </div>
-            
+
 
             <div class="bottom-footer">
                 <p>Copyright &copy; <a href="#home" style="text-decoration: none;">Nikhil</a> - All rights reserved
@@ -275,6 +277,37 @@
 
     <!-- ----- MAIN JS ----- -->
     <script src="script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("CT2yccCgr5HV1XMXx"); // Replace with your EmailJS public key
+        })();
+
+        function sendEmail() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+
+            if (!name || !email || !message) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            const params = {
+                from_name: name,
+                from_email: email,
+                message: message
+            };
+
+            emailjs.send("service_68perjo", "template_tolqdfh", params)
+                .then(function (response) {
+                    alert("Email sent successfully!");
+                }, function (error) {
+                    alert("Failed to send email: " + JSON.stringify(error));
+                });
+        }
+    </script>
 </body>
 
 </html>
